@@ -2,35 +2,35 @@
 
 学习收获
 
-* 企业级的编码规范
-* 从零开始，封装后台管理系统
-* 菜单权限与按钮权限
-* 数据大屏
-* svg矢量图在项目中应用
-* 主题颜色切换与暗黑模式的切换
+- 企业级的编码规范
+- 从零开始，封装后台管理系统
+- 菜单权限与按钮权限
+- 数据大屏
+- svg矢量图在项目中应用
+- 主题颜色切换与暗黑模式的切换
 
 技术选型
 
-* Vue3 + 组合式API
-* Vite构建工具
-* TypeScript
-* vue-router
-* Pinia状态管理
-* element-plus
-* Axios网络交互
-* Echarts数据大屏
+- Vue3 + 组合式API
+- Vite构建工具
+- TypeScript
+- vue-router
+- Pinia状态管理
+- element-plus
+- Axios网络交互
+- Echarts数据大屏
 
 ## [学前准备]1.Vue3组件通信方式
 
 [通信仓库地址](https://gitee.com/jch1011/vue3_communication)
 
-* props 可以实现父子组件、子父组件、甚至兄弟组件通信
-* 自定义事件：可以实现子父组件通信
-* 全局事件总栈$bus：可以实现任意组件通信
-* pubsub：发布订阅模式实现任意组件通信
-* vuex：集中式状态管理容器、实现任意组件通信
-* ref：父组件获取子组件实例VC，获取子组件的响应式数据以及方法
-* slot：插槽（默认插槽、具名插槽、作用域插槽）实现父子组件通信...
+- props 可以实现父子组件、子父组件、甚至兄弟组件通信
+- 自定义事件：可以实现子父组件通信
+- 全局事件总栈$bus：可以实现任意组件通信
+- pubsub：发布订阅模式实现任意组件通信
+- vuex：集中式状态管理容器、实现任意组件通信
+- ref：父组件获取子组件实例VC，获取子组件的响应式数据以及方法
+- slot：插槽（默认插槽、具名插槽、作用域插槽）实现父子组件通信...
 
 ### 1.1 props
 
@@ -76,8 +76,8 @@ let props = defineProps(['info', 'money']) //数组|对象写法都可以
 
 这里主要说明vue3的自定义事件
 
-* 利用`defineEmits`方法返回函数触发自定义事件
-* `defineEmits`方法不需要引入直接使用
+- 利用`defineEmits`方法返回函数触发自定义事件
+- `defineEmits`方法不需要引入直接使用
 
 ```ts
 <script setup lang="ts">
@@ -102,27 +102,26 @@ const handler = () => {
 
 ```js
 //引入mitt插件:mitt一个方法,方法执行会返回bus对象
-import mitt from 'mitt';
-const $bus = mitt();
+import mitt from 'mitt'
+const $bus = mitt()
 
 // 传递数据
-$bus.emit('car',{car:"法拉利"});
+$bus.emit('car', { car: '法拉利' })
 
 // 接收数据
-// 第一个参数:即为事件类型  
+// 第一个参数:即为事件类型
 // 第二个参数:即为事件回调
-$bus.on("car", (car) => {
-   console.log(car);
-});
-
+$bus.on('car', (car) => {
+  console.log(car)
+})
 ```
 
 ### 1.4 v-model
 
-* v-model指令:收集表单数据,数据双向绑定
-* v-model也可以实现组件之间的通信, 实现父子组件数据同步的业务
-  * 父亲给子组件数据 props、子组件给父组件数据 自定义事件
-* 在vue3中可以绑定多个v-model传递数据🔥
+- v-model指令:收集表单数据,数据双向绑定
+- v-model也可以实现组件之间的通信, 实现父子组件数据同步的业务
+  - 父亲给子组件数据 props、子组件给父组件数据 自定义事件
+- 在vue3中可以绑定多个v-model传递数据🔥
 
 子组件`child1.vue`
 
@@ -195,7 +194,7 @@ const handler = ()=>{
     <hr />
     <!-- props:父亲给儿子数据 -->
     <!-- <Child :modelValue="money" @update:modelValue="handler"></Child> -->
-    <!-- 
+    <!--
        v-model组件身上使用
        第一:相当有给子组件传递props[modelValue] = 10000
        第二:相当于给子组件绑定自定义事件update:modelValue
@@ -235,17 +234,17 @@ let pageSize = ref(3);
 
 ### 1.5 useAttrs
 
-* `useAttrs` 获取组件标签身上`属性与事件`, 此方法执行会返回一个对象
-* `props`与`useAttrs`方法都可以获取父组件传递过来的属性与属性值
-* 但是props接受了useAttrs方法就获取不到了 ⚠️
+- `useAttrs` 获取组件标签身上`属性与事件`, 此方法执行会返回一个对象
+- `props`与`useAttrs`方法都可以获取父组件传递过来的属性与属性值
+- 但是props接受了useAttrs方法就获取不到了 ⚠️
 
-1.el-button 按钮组件二次封装，新增功能：鼠标移入文字提示
+  1.el-button 按钮组件二次封装，新增功能：鼠标移入文字提示
 
 ```ts
 <template>
   <div :title="title">
-     <el-button :="$attrs"></el-button> 
-     <!-- 
+     <el-button :="$attrs"></el-button>
+     <!--
       👆的写法 :="$attrs" 解析, 形如下面的写法
        <h1 v-bind="{a: 1, b: 2}"></h1>
        <h1 :="{a: 1, b: 2}"></h1>
@@ -308,11 +307,11 @@ const handler = ()=>{
 
 ⚠️ 要想通过`ref与$parent`获取数据，需要对方通过`defineExpose`暴露数据
 
-* 父组件通过`ref`获取子组件通过`defineExpose`暴露的数据
-   `ref`:可以获取真实的DOM节点, 父组件可以获取到子组件实例VC
+- 父组件通过`ref`获取子组件通过`defineExpose`暴露的数据
+  `ref`:可以获取真实的DOM节点, 父组件可以获取到子组件实例VC
 
-* 子组件通过`$parent`获取父组件通过`defineExpose`暴露的数据
-   `$parent`:可以在子组件内部获取到父组件的实例
+- 子组件通过`$parent`获取父组件通过`defineExpose`暴露的数据
+  `$parent`:可以在子组件内部获取到父组件的实例
 
 子组件 Son.vue
 
@@ -353,7 +352,7 @@ defineExpose({
 <template>
   <div class="dau">
      <h1>我是闺女曹杰{{money}}</h1>
-     <!-- 
+     <!--
       事件注入 $parent 用于获取子组件的父组件实例数据
       前提：父组件通过defineExpose暴露数据 🔥
     -->
@@ -451,11 +450,11 @@ const updateFruit = ()=>{
 
 ### 1.8 pinia
 
-* vuex:集中式管理状态容器,可以实现任意组件之间通信！！！
-  * 核心概念:`state、mutations、actions、getters、modules`
-* pinia:集中式管理状态容器,可以实现任意组件之间通信！！！
-  * 核心概念:`state、actions、getters`
-  * pinia写法:选择器API、组合式API
+- vuex:集中式管理状态容器,可以实现任意组件之间通信！！！
+  - 核心概念:`state、mutations、actions、getters、modules`
+- pinia:集中式管理状态容器,可以实现任意组件之间通信！！！
+  - 核心概念:`state、actions、getters`
+  - pinia写法:选择器API、组合式API
 
 使用方法如下
 
@@ -463,11 +462,11 @@ const updateFruit = ()=>{
 
 ```ts
 //创建大仓库
-import { createPinia } from 'pinia';
+import { createPinia } from 'pinia'
 //createPinia方法可以用于创建大仓库
-let store = createPinia();
+let store = createPinia()
 //对外暴露,安装仓库
-export default store;
+export default store
 ```
 
 然后在入口文件 main.ts 中注册全局
@@ -486,35 +485,35 @@ app.use(store)
 
 ```ts
 //定义info小仓库
-import { defineStore } from "pinia";
+import { defineStore } from 'pinia'
 //第一个仓库:小仓库名字  第二个参数:小仓库配置对象 🔥
 //defineStore方法执行会返回一个函数,函数作用就是让组件可以获取到仓库数据
-let useInfoStore = defineStore("info", {
-    //存储数据:state
-    state: () => {
-        return {
-            count: 99,
-            arr: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-        }
-    },
-    actions: {
-        //注意:函数没有context上下文对象
-        //没有commit、没有mutations去修改数据
-        updateNum(a: number, b: number) {
-            this.count += a;
-        }
-    },
-    getters: {
-        total() {
-            let result:any = this.arr.reduce((prev: number, next: number) => {
-                return prev + next;
-            }, 0);
-            return result;
-        }
+let useInfoStore = defineStore('info', {
+  //存储数据:state
+  state: () => {
+    return {
+      count: 99,
+      arr: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
     }
-});
+  },
+  actions: {
+    //注意:函数没有context上下文对象
+    //没有commit、没有mutations去修改数据
+    updateNum(a: number, b: number) {
+      this.count += a
+    },
+  },
+  getters: {
+    total() {
+      let result: any = this.arr.reduce((prev: number, next: number) => {
+        return prev + next
+      }, 0)
+      return result
+    },
+  },
+})
 //对外暴露方法
-export default useInfoStore;
+export default useInfoStore
 ```
 
 使用方法
@@ -553,30 +552,34 @@ const updateCount = () => {
 
 ```ts
 //定义组合式API仓库
-import { defineStore } from "pinia";
-import { ref, computed,watch} from 'vue';
+import { defineStore } from 'pinia'
+import { ref, computed, watch } from 'vue'
 //创建小仓库，第二参数传入箭头函数 🔥
 let useTodoStore = defineStore('todo', () => {
-    let todos = ref([{ id: 1, title: '吃饭' }, { id: 2, title: '睡觉' }, { id: 3, title: '打豆豆' }]);
-    let arr = ref([1,2,3,4,5]);
+  let todos = ref([
+    { id: 1, title: '吃饭' },
+    { id: 2, title: '睡觉' },
+    { id: 3, title: '打豆豆' },
+  ])
+  let arr = ref([1, 2, 3, 4, 5])
 
-    const total = computed(() => {
-        return arr.value.reduce((prev, next) => {
-            return prev + next;
-        }, 0)
-    })
-    //务必要返回一个对象:属性与方法可以提供给组件使用 🔥
-    return {
-        todos,
-        arr,
-        total,
-        updateTodo() {
-            todos.value.push({ id: 4, title: '组合式API方法' });
-        }
-    }
-});
+  const total = computed(() => {
+    return arr.value.reduce((prev, next) => {
+      return prev + next
+    }, 0)
+  })
+  //务必要返回一个对象:属性与方法可以提供给组件使用 🔥
+  return {
+    todos,
+    arr,
+    total,
+    updateTodo() {
+      todos.value.push({ id: 4, title: '组合式API方法' })
+    },
+  }
+})
 
-export default useTodoStore;
+export default useTodoStore
 ```
 
 使用方法
@@ -615,8 +618,8 @@ const updateTodo = () => {
 
 ### 1.9 slot
 
-* 插槽:默认插槽、具名插槽、作用域插槽
-* 作用域插槽:就是可以传递数据的插槽,子组件可以讲数据回传给父组件,父组件可以决定这些回传的
+- 插槽:默认插槽、具名插槽、作用域插槽
+- 作用域插槽:就是可以传递数据的插槽,子组件可以讲数据回传给父组件,父组件可以决定这些回传的
   数据是以何种结构或者外观在子组件内部去展示！！！
 
 slotTest.vue
@@ -732,8 +735,8 @@ defineProps(["todos"]);
 
 环境准备
 
-* node v16.14.2
-* pnpm 8.00
+- node v16.14.2
+- pnpm 8.00
 
 创建项目
 
@@ -777,55 +780,48 @@ npx eslint --init
 
 ```cjs
 module.exports = {
-    // 运行环境
-    "env": {
-        "browser": true, // 浏览器端
-        "es2021": true
+  // 运行环境
+  env: {
+    browser: true, // 浏览器端
+    es2021: true,
+  },
+  // 规则继承
+  extends: [
+    // 全部规则默认是关闭的，这个配置项开启推荐规则，推荐规则参照文档
+    // 比如：函数不能重名、对象不能出现重复key
+    'eslint:recommended',
+    // ts语法规则
+    'plugin:@typescript-eslint/recommended',
+    // vue3语法规则
+    'plugin:vue/vue3-essential',
+  ],
+  // 要为特定类型的文件指定处理器
+  overrides: [
+    {
+      env: {
+        node: true,
+      },
+      files: ['.eslintrc.{js,cjs}'],
+      parserOptions: {
+        sourceType: 'script',
+      },
     },
-    // 规则继承
-    "extends": [
-        // 全部规则默认是关闭的，这个配置项开启推荐规则，推荐规则参照文档
-        // 比如：函数不能重名、对象不能出现重复key
-        "eslint:recommended",
-        // ts语法规则
-        "plugin:@typescript-eslint/recommended",
-        // vue3语法规则
-        "plugin:vue/vue3-essential"
-    ],
-    // 要为特定类型的文件指定处理器
-    "overrides": [
-        {
-            "env": {
-                "node": true
-            },
-            "files": [
-                ".eslintrc.{js,cjs}"
-            ],
-            "parserOptions": {
-                "sourceType": "script"
-            }
-        }
-    ],
-    // 指定解析器选项
-    "parserOptions": {
-        // 校验ECMA最新版本
-        "ecmaVersion": "latest",
-        "parser": "@typescript-eslint/parser",
-        // 设置为“script”（默认），或者 “module”代码在ECMAScript模块中
-        "sourceType": "module"
-    },
-    // ESLint支持使用第三方插件，在使用插件之前，您必须使用npm安装
-    // 该eslint-plugin- 前缀可以从插件名称被省略
-    // 如：eslint-plugin-vue
-    "plugins": [
-        "@typescript-eslint",
-        "vue"
-    ],
-    // eslint规则
-    "rules": {
-    }
+  ],
+  // 指定解析器选项
+  parserOptions: {
+    // 校验ECMA最新版本
+    ecmaVersion: 'latest',
+    parser: '@typescript-eslint/parser',
+    // 设置为“script”（默认），或者 “module”代码在ECMAScript模块中
+    sourceType: 'module',
+  },
+  // ESLint支持使用第三方插件，在使用插件之前，您必须使用npm安装
+  // 该eslint-plugin- 前缀可以从插件名称被省略
+  // 如：eslint-plugin-vue
+  plugins: ['@typescript-eslint', 'vue'],
+  // eslint规则
+  rules: {},
 }
-
 ```
 
 ### 2.2 vue3环境代码校验插件
@@ -855,88 +851,83 @@ pnpm install -D eslint-plugin-import eslint-plugin-vue eslint-plugin-node eslint
 // @see https://eslint.bootcss.com/docs/rules
 
 module.exports = {
-    // 运行环境
-    "env": {
-        "browser": true, // 浏览器端
-        "es2021": true,
-        "node": true,
-        "jest": true
+  // 运行环境
+  env: {
+    browser: true, // 浏览器端
+    es2021: true,
+    node: true,
+    jest: true,
+  },
+  // 规则继承
+  extends: [
+    // 全部规则默认是关闭的，这个配置项开启推荐规则，推荐规则参照文档
+    // 比如：函数不能重名、对象不能出现重复key
+    'eslint:recommended',
+    // ts语法规则
+    'plugin:@typescript-eslint/recommended',
+    // vue3语法规则
+    'plugin:vue/vue3-essential',
+    'plugin:prettier/recommended',
+  ],
+  // 要为特定类型的文件指定处理器
+  overrides: [
+    {
+      env: {
+        node: true,
+      },
+      files: ['.eslintrc.{js,cjs}'],
+      parserOptions: {
+        sourceType: 'script',
+      },
     },
-    // 规则继承
-    "extends": [
-        // 全部规则默认是关闭的，这个配置项开启推荐规则，推荐规则参照文档
-        // 比如：函数不能重名、对象不能出现重复key
-        "eslint:recommended",
-        // ts语法规则
-        "plugin:@typescript-eslint/recommended",
-        // vue3语法规则
-        "plugin:vue/vue3-essential",
-        "plugin:prettier/recommended"
-    ],
-    // 要为特定类型的文件指定处理器
-    "overrides": [
-        {
-            "env": {
-                "node": true
-            },
-            "files": [
-                ".eslintrc.{js,cjs}"
-            ],
-            "parserOptions": {
-                "sourceType": "script"
-            }
-        }
-    ],
-    // 指定如何解析语法
-    "parser": "vue-eslint-parser",
-    // 指定解析器选项: 优先级低于 parse的语法解析配置 
-    "parserOptions": {
-        // 校验ECMA最新版本
-        "ecmaVersion": "latest",
-        "parser": "@typescript-eslint/parser",
-        // 设置为“script”（默认），或者 “module”代码在ECMAScript模块中
-        "sourceType": "module",
-        "jsxPragma": "React",
-        "ecmaFeatures": {
-            "jsx": true
-        }
+  ],
+  // 指定如何解析语法
+  parser: 'vue-eslint-parser',
+  // 指定解析器选项: 优先级低于 parse的语法解析配置
+  parserOptions: {
+    // 校验ECMA最新版本
+    ecmaVersion: 'latest',
+    parser: '@typescript-eslint/parser',
+    // 设置为“script”（默认），或者 “module”代码在ECMAScript模块中
+    sourceType: 'module',
+    jsxPragma: 'React',
+    ecmaFeatures: {
+      jsx: true,
     },
-    // ESLint支持使用第三方插件，在使用插件之前，您必须使用npm安装
-    // 该eslint-plugin- 前缀可以从插件名称被省略
-    // 如：eslint-plugin-vue
-    "plugins": [
-        "@typescript-eslint",
-        "vue"
-    ],
-    /**
-     * @eslint规则
-     * "off" 或者 0  ==> 关闭规则
-     * "warn" 或 1  ==> 打开的规则作为警告（不影响代码执行）
-     * "error" 或 2 ==> 规则作为一个错误（代码不能执行，界面报错）
-     */
-    "rules": {
-        // eslint(https://eslint.bootcss.com/docs/rules)
-        "no-var": "error", // 要求使用let 或者 const 而不是var
-        "no-multiple-empty-lines": ["warn", {max: 1}], // 不允许多个空行
-        "no-console": process.env.NODE_ENV === "production" ? "error" : "off",
-        "no-debugger": process.env.NODE_ENV === "production" ? "error" : "off",
-        "no-unexpected-multiline": "error", // 禁止空余的多行
-        "no-useless-escape": "off", // 禁止不必要的转义字符
+  },
+  // ESLint支持使用第三方插件，在使用插件之前，您必须使用npm安装
+  // 该eslint-plugin- 前缀可以从插件名称被省略
+  // 如：eslint-plugin-vue
+  plugins: ['@typescript-eslint', 'vue'],
+  /**
+   * @eslint规则
+   * "off" 或者 0  ==> 关闭规则
+   * "warn" 或 1  ==> 打开的规则作为警告（不影响代码执行）
+   * "error" 或 2 ==> 规则作为一个错误（代码不能执行，界面报错）
+   */
+  rules: {
+    // eslint(https://eslint.bootcss.com/docs/rules)
+    'no-var': 'error', // 要求使用let 或者 const 而不是var
+    'no-multiple-empty-lines': ['warn', { max: 1 }], // 不允许多个空行
+    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'no-unexpected-multiline': 'error', // 禁止空余的多行
+    'no-useless-escape': 'off', // 禁止不必要的转义字符
 
-        // typeScript (https://typescript-eslint.io/rules)
-        "@typescript-eslint/no-unused-vars": "error", // 禁止定义未使用的变量🔥
-        "@typescript-eslint/prefer-ts-expect-error": "error", // 禁止使用 @ts-ignore
-        "@typescript-eslint/no-explicit-any": "off", // 禁止使用any类型
-        "@typescript-eslint/no-non-null-assertion": "off",
-        "@typescript-eslint/no-namespace": "off", // 禁止使用自定义 TypeScript 模块和命名空间
-        "@typescript-eslint/semi": "off",
+    // typeScript (https://typescript-eslint.io/rules)
+    '@typescript-eslint/no-unused-vars': 'error', // 禁止定义未使用的变量🔥
+    '@typescript-eslint/prefer-ts-expect-error': 'error', // 禁止使用 @ts-ignore
+    '@typescript-eslint/no-explicit-any': 'off', // 禁止使用any类型
+    '@typescript-eslint/no-non-null-assertion': 'off',
+    '@typescript-eslint/no-namespace': 'off', // 禁止使用自定义 TypeScript 模块和命名空间
+    '@typescript-eslint/semi': 'off',
 
-        // eslint-plugin-vue (https://eslint.vuejs.org/rules/)
-        "vue/multi-word-component-names": "off", // 要求组件名称始终为"-"链接的单词
-        "vue/script-setup-uses-vars": "error", // 防止<script setup>使用的变量<template>被标记为未使用
-        "vue/no-mutating-props": "off", // 不允许组件props改变
-        "vue/attribute-hyphenation": "off", // 对模版中的自定义组件强制执行属性命名样式
-    }
+    // eslint-plugin-vue (https://eslint.vuejs.org/rules/)
+    'vue/multi-word-component-names': 'off', // 要求组件名称始终为"-"链接的单词
+    'vue/script-setup-uses-vars': 'error', // 防止<script setup>使用的变量<template>被标记为未使用
+    'vue/no-mutating-props': 'off', // 不允许组件props改变
+    'vue/attribute-hyphenation': 'off', // 对模版中的自定义组件强制执行属性命名样式
+  },
 }
 ```
 
@@ -954,8 +945,8 @@ node_modules
 
 package.json 新增两个运行脚本
 
-* 运行 `npm run lint` 让eslint`校验`src文件下的语法
-* 运行 `npm run fix`  让eslint`纠正`src文件下不符合规则的语法
+- 运行 `npm run lint` 让eslint`校验`src文件下的语法
+- 运行 `npm run fix` 让eslint`纠正`src文件下不符合规则的语法
 
 ```json
 "scripts": {
@@ -1002,3 +993,104 @@ pnpm install -D eslint-plugin-prettier prettier eslint-config-prettier
 ```
 
 通过`pnpm run lint` 检测语法，如果出现不规范，通过 `pnpm run fix`修改
+
+### 2.7 项目中styleLint工具配置
+
+stylelint为css的lint工具，可格式化css代码，检查css语法错误与不合理的写法，指定css书写顺序等。
+我们的项目中使用scss作为预处理器，安装以下依赖：
+
+```text
+pnpm add sass sass-loader stylelint postcss postcss-scss postcss-html stylelint-config-prettier stylelint-config-recess-order stylelint-config-recommended-scss stylelint-config-standard stylelint-config-standard-vue stylelint-scss stylelint-order stylelint-config-standard-scss -D
+```
+
+在项目根目录新建`.stylelintrc.cjs`配置文件
+[官网](https://stylelint.bootcss.com/)
+
+```cjs
+// @see https://stylelint.bootcss.com/
+
+module.exports = {
+  extends: [
+    'stylelint-config-standard', // 配置stylelint拓展插件
+    'stylelint-config-html/vue', // 配置 vue中 template样式格式化
+    'stylelint-config-standard-scss', // 配置stylelint scss插件
+    'stylelint-config-recommended-vue/scss', // 配置 vue中 scss 样式格式化
+    'stylelint-config-recess-order', // 配置stylelint css属性书写顺序插件
+    'stylelint-config-prettier', // 配置stylelint 和 prettier 兼容
+  ],
+  overrides: [
+    {
+      files: ['**/*.(scss|css|vue|html)'],
+      customSyntax: 'postcss-scss',
+    },
+    {
+      files: ['**/*.(html|vue)'],
+      customSyntax: 'postcss-html',
+    },
+  ],
+  ignoreFiles: [
+    '**/*.js',
+    '**/*.jsx',
+    '**/*.tsx',
+    '**/*.ts',
+    '**/*.json',
+    '**/*.md',
+    '**/*.yaml',
+  ],
+  /**
+   * null   ==> 关闭该规则
+   * always ==> 必须
+   */
+  rules: {
+    'value-keyword-case': null, // 在css中使用 v-bind, 不报错
+    'no-descending-specificity': null, // 禁止在具有较高优先级的选择器后出现被其覆盖的较低优先级的选择器
+    'function-url-quotes': 'always', // 要求或禁止 URL 的引号 "always(必须加引号)"｜"never(没有引号)"
+    'no-empty-source': null, // 关闭禁止空源码
+    'selector-class-pattern': null, // 关闭强制选择器类名的样式
+    'property-no-unknown': null, // 禁止未知的属性（true 为不允许）
+    'block-opening-brace-space-before': 'always', // 大括号之前必须有一个空格或不能有空白符
+    'value-no-vendor-prefix': null, // 关闭 属性值前缀 --webkit-box
+    'property-no-vendor-prefix': null, // 关闭 属性前缀 -webkit-mask
+    'selector-pseudo-class-no-unknown': [
+      true, // 不允许未知的选择器
+      {
+        ignorePseudoClasses: ['global', 'v-deep', 'deep'], // 忽略属性，修改element默认样式的时候使用
+      },
+    ],
+  },
+}
+```
+
+在项目根目录新建文件 `.stylelintignore` 忽略文件
+
+```text
+/node_modules/*
+/dist/*
+/html/*
+/public/*
+```
+
+运行脚本
+
+```json
+"scripts": {
+  "lint:style": "stylelint src/**/*.{css,scss,vue} --cache --fix"
+}
+```
+
+最后配置统一的prettier来格式化我们的js和css，html代码
+
+```json
+"scripts": {
+  "dev": "vite --open",
+  "build": "vue-tsc && vite build",
+  "preview": "vite preview",
+  "lint": "eslint src",
+  "fix": "eslint src --fix",
+  "format": "prettier --write \"./**/*.{html,vue,ts,js,json,md}\"",
+  "lint:eslint": "eslint src/**/*.{ts,vue} --cache --fix",
+  "lint:style": "stylelint src/**/*.{css,scss,vue} --cache --fix"
+},
+```
+
+当运行 `pnpm format` 代码直接格式化

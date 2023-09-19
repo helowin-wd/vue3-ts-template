@@ -1278,3 +1278,116 @@ Element Plus 全局组件类型声明 (可省略)
   }
 }
 ```
+
+### 3.2 src文件夹别名配置
+
+在开发项目的时候文件与文件关系可能很复杂，需要给src文件夹配置一个别名
+
+```ts
+// vite.config.ts
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import path from 'path'
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [vue()],
+  resolve: {
+    alias: {
+      "@": path.resolve("./src") // 相对路径别名配置，使用@代替src
+    }
+  }
+})
+```
+
+TypeScript 编译配置
+
+```json
+// tsconfig.json
+{
+  "compilerOptions": {
+    "baseUrl": "./", // 解析非相对模块的基地址，默认是当前目录
+    // 路径映射，相对于baseUrl
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  }
+}
+```
+
+### 3.3 项目环境变量配置
+
+项目根目录分别添加：开发、生产、测试环境的文件！
+
+- `.env.development`
+
+```text
+# 变量必须以 VITE_ 为前缀才能暴露给外部读取
+NODE_ENV = 'development'
+VITE_APP_TITLE = 'vue-ts-template'
+VITE_APP_BASE_API = '/dev-api'
+```
+
+- `.env.production`
+
+```text
+# 变量必须以 VITE_ 为前缀才能暴露给外部读取
+NODE_ENV = 'production'
+VITE_APP_TITLE = 'vue-ts-template'
+VITE_APP_BASE_API = '/prod-api'
+```
+
+- `.env.test`
+
+```text
+# 变量必须以 VITE_ 为前缀才能暴露给外部读取
+NODE_ENV = 'test'
+VITE_APP_TITLE = 'vue-ts-template'
+VITE_APP_BASE_API = '/test-api'
+```
+
+配置运行命令：package.json
+
+```json
+"scripts": {
+  "build:test": "vue-tsc && vite build --mode test",
+  "build:pro": "vue-tsc && vite build --mode production",
+}
+```
+
+通过 `import.meta.env` 获取环境变量
+
+### 3.4 SVG图标配置以及自定义插件注册全局组件
+
+安装依赖插件
+
+```text
+pnpm install vite-plugin-svg-icons -D
+```
+
+在 `vite.config.ts` 中配置插件
+
+```ts
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import path from 'path'
+// 引入svg插件 🔥
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [
+    vue(),
+    createSvgIconsPlugin({
+      iconDirs: [path.resolve(process.cwd(), 'src/assets/icons')],
+      symbolId: 'icon-[dir]-[name]'
+    })
+  ],
+  resolve: {
+    alias: {
+      "@": path.resolve("./src") // 相对路径别名配置，使用@代替src
+    }
+  }
+})
+
+```

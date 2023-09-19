@@ -1209,3 +1209,28 @@ pnpm commitlint
 
 当我们commit提交信息时，就不能随意写了，必须是 `git commit -m 'fix: xxx'`
 符合类型的才可以，需要注意的是类型的后面需要用`英文的:`，并且冒号后面是需要`空一格`的
+
+### 2.10 强制使用pnpm包管理工具
+
+团队开发项目的时候，需要统一包管理器工具，因为不同包管理器工具下载同一个依赖，可能版本不一样，导致项目出现bug问题，因此包管理器工具需要统一管理！！！
+在根目录下新建 `scripts/preinstall.js` 文件，添加如下代码
+
+```js
+if(!/pnpm/.test(process.env.npm_execpath || '')) {
+  console.warn(
+    `\u001b[33mThis repository must musing pnpm as the package manager ` + `for scripts to work properly.\u001b[39m\n]`
+  )
+  process.exit(1)
+}
+```
+
+配置命令
+
+```json
+"scripts": {
+  "preinstall": "node ./scripts/preinstall.js"
+}
+```
+
+当我们使用npm或者yarn来安装的时候，就会报错了。
+原理就在于：在install的时候会触发preinstall (npm提供的生命周期钩子)这个文件里面的代码

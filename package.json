@@ -13,9 +13,11 @@
     "lint:eslint": "eslint src/**/*.{ts,vue} --cache --fix",
     "lint:style": "stylelint src/**/*.{css,scss,vue} --cache --fix",
     "prepare": "husky install",
-    "commitlint": "commitlint --config commitlint.config.cjs -e -V"
+    "commitlint": "commitlint --config commitlint.config.cjs -e -V",
+    "preinstall": "node ./scripts/preinstall.js"
   },
   "dependencies": {
+    "element-plus": "^2.3.14",
     "vue": "^3.3.4"
   },
   "devDependencies": {

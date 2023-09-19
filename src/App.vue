@@ -3,15 +3,12 @@
 </template>
 
 <script setup lang="ts">
-const str = '小红'
+for(let i=0;i<5;i++)
+{
+  console.log(i)
+}
 </script>
 
 <style scoped lang="scss">
-.box {
-  width: 600px;
-  height: 400px;
-  h1 {
-    color: white;
-  }
-}
+
 </style>

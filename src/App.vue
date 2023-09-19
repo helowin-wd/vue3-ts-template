@@ -16,7 +16,7 @@
 <script setup lang="ts">
 // 引入图标
 import { Delete, Edit, Search, Share, Upload } from '@element-plus/icons-vue'
-import Test from '@/components/Test.vue';
+import Test from '@/components/Test.vue'
 
 console.log(import.meta.env)
 </script>

@@ -1,11 +1,6 @@
 <template>
-  <div>
-   Test页面
-  </div>
+  <div>Test页面</div>
 </template>
 
-<script setup lang="ts">
-
-</script>
-<style lang="scss" scoped>
-</style>
+<script setup lang="ts"></script>
+<style lang="scss" scoped></style>

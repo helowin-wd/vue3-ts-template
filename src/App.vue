@@ -3,11 +3,10 @@
 </template>
 
 <script setup lang="ts">
-for (let i = 0; i < 5; i++) 
-{
+for (let i = 0; i < 5; i++) {
   console.log(i)
 }
-var aa = '测试代码格式化效果';
+var aa = '测试代码格式化效果'
 console.log(aa)
 </script>
 

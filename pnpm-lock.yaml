@@ -40,6 +40,9 @@ devDependencies:
   eslint-plugin-vue:
     specifier: ^9.17.0
     version: 9.17.0(eslint@8.49.0)
+  prettier:
+    specifier: ^3.0.3
+    version: 3.0.3
   typescript:
     specifier: ^5.0.2
     version: 5.0.2

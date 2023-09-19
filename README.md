@@ -963,3 +963,42 @@ package.json 新增两个运行脚本
   "fix": "eslint src --fix"
 },
 ```
+
+### 2.6 项目中prettier格式化工具配置
+
+有了eslint，为什么还要有prettier？eslint针对的是javascript，它是一个检测工具，包含js语法以及少部分格式问题，在eslint看来，语法对了就能保证代码正常执行，格式问题属于其次：
+而prettier属于格式化工具，它看不惯格式不统一，所以它就把eslint没完成的事儿接着干，另外，prettier支持包含js在内的多种语言。
+总结起来：eslint和prettier这俩兄弟一个保证js代码质量，一个保证代码美观。
+安装依赖包
+
+```text
+pnpm install -D eslint-plugin-prettier prettier eslint-config-prettier
+```
+
+在项目根目录新建`.prettierrc.json`文件 添加规则
+
+```json
+{
+  "singleQuote": true,
+  "semi": false,
+  "bracketSpacing": true,
+  "htmlWhitespaceSensitivity": "ignore",
+  "endOfLine": "auto",
+  "trailingComma": "all",
+  "tabWidth": 2
+}
+```
+
+在项目根目录新建`.prettierignore`忽略文件
+
+```text
+/dist/*
+/html/*
+.local
+/node_modules/**
+**/*.svg
+**/*.sh
+/public/*
+```
+
+通过`pnpm run lint` 检测语法，如果出现不规范，通过 `pnpm run fix`修改

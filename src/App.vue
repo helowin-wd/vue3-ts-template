@@ -5,7 +5,8 @@
     <el-button type="primary" :icon="Delete" />
     <el-button type="primary" :icon="Search">Search</el-button>
     <el-button type="primary">
-      Upload<el-icon class="el-icon--right"><Upload /></el-icon>
+      Upload
+      <el-icon class="el-icon--right"><Upload /></el-icon>
     </el-button>
   </div>
 </template>

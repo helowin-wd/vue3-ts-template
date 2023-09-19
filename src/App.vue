@@ -1,13 +1,18 @@
 <template>
-  <div>App页面</div>
+  <div>
+    <el-button type="primary" :icon="Edit" />
+    <el-button type="primary" :icon="Share" />
+    <el-button type="primary" :icon="Delete" />
+    <el-button type="primary" :icon="Search">Search</el-button>
+    <el-button type="primary">
+      Upload<el-icon class="el-icon--right"><Upload /></el-icon>
+    </el-button>
+  </div>
 </template>
 
 <script setup lang="ts">
-for (let i = 0; i < 5; i++) {
-  console.log(i)
-}
-var aa = '测试代码格式化效果'
-console.log(aa)
+// 引入图标
+import { Delete, Edit, Search, Share, Upload } from '@element-plus/icons-vue'
 </script>
 
 <style scoped lang="scss"></style>

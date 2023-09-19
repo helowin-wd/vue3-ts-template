@@ -1235,3 +1235,46 @@ if (!/pnpm/.test(process.env.npm_execpath || '')) {
 
 当我们使用npm或者yarn来安装的时候，就会报错了。
 原理就在于：在install的时候会触发preinstall (npm提供的生命周期钩子)这个文件里面的代码
+
+## 3.项目集成
+
+### 3.1 集成element-plus
+
+[官网地址](https://element-plus.gitee.io/zh-CN)
+
+```text
+pnpm install element-plus @element-plus/icons-vue
+```
+
+入口文件main.ts全局安装element-plus，element-plus默认支持语言英语设置为中文
+
+```ts
+import { createApp } from 'vue'
+import App from './App.vue'
+
+// 引入element-plus插件与样式
+import ElementPlus from 'element-plus'
+import 'element-plus/dist/index.css'
+
+// @ts-ignore 忽略当前文件ts类型的检测否则有红色提示（打包会失败）🔥
+import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
+
+// 获取应用实例对象
+const app = createApp(App)
+app.use(ElementPlus, {
+  locale: zhCn,
+})
+// 将应用挂载到挂载点上
+app.mount('#app')
+```
+
+Element Plus 全局组件类型声明 (可省略)
+
+```tsconfig.json
+{
+  "compilerOptions": {
+    // ...
+    "types": ["element-plus/global"]
+  }
+}
+```

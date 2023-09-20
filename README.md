@@ -1406,3 +1406,7 @@ export default defineConfig({
 ```text
 pnpm install mockjs vite-plugin-mock@2.9.6 -D
 ```
+
+[git提交记录: mock数据、axios二次封装](https://github.com/helowin-wd/vue3-ts-template/commit/f62b2380c3f22497f81e538be670a487e395f03e)
+
+### 3.7 路由配置

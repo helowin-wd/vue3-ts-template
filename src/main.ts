@@ -24,5 +24,8 @@ app.use(globalComponent)
 // 引入模版的全局样式
 import '@/styles/index.scss'
 
+// 引入路由
+import router from '@/router'
+app.use(router)
 // 将应用挂载到挂载点上
 app.mount('#app')

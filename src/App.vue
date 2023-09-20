@@ -10,6 +10,7 @@
     </el-button>
     <Test />
     <svg-icon name="phone" color="pink" width="100px" height="100px"></svg-icon>
+    <h1>App</h1>
   </div>
 </template>
 
@@ -21,4 +22,8 @@ import Test from '@/components/Test.vue'
 console.log(import.meta.env)
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+h1 {
+  color: $color;
+}
+</style>

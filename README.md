@@ -1390,3 +1390,7 @@ export default defineConfig({
   },
 })
 ```
+
+[git提交记录](https://github.com/helowin-wd/vue3-ts-template/commit/042db7cc540499ed15c07b3bbb6543179301499a)
+
+### 3.5 集成sass

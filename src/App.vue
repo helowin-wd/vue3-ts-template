@@ -25,9 +25,9 @@ import { reqLogin } from '@/api/user'
 
 onMounted(() => {
   reqLogin({
-      username: 'admin',
-      password: '123456',
-    }).then((res) => {
+    username: 'admin',
+    password: '123456',
+  }).then((res) => {
     console.log(res)
   })
 })

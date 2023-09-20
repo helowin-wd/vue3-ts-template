@@ -1,4 +1,3 @@
-
 function createUserList() {
   return [
     {

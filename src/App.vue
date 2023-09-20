@@ -19,6 +19,19 @@
 import { Delete, Edit, Search, Share, Upload } from '@element-plus/icons-vue'
 import Test from '@/components/Test.vue'
 
+import { onMounted } from 'vue'
+
+import { reqLogin } from '@/api/user'
+
+onMounted(() => {
+  reqLogin({
+      username: 'admin',
+      password: '123456',
+    }).then((res) => {
+    console.log(res)
+  })
+})
+
 console.log(import.meta.env)
 </script>
 

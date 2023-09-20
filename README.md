@@ -1394,3 +1394,15 @@ export default defineConfig({
 [git提交记录](https://github.com/helowin-wd/vue3-ts-template/commit/042db7cc540499ed15c07b3bbb6543179301499a)
 
 ### 3.5 集成sass
+
+[git提交记录: 集成sass](https://github.com/helowin-wd/vue3-ts-template/commit/11eab32e9e94acea0896b9ba47ebd8e680036e51)
+
+### 3.6 mock数据、axios二次封装
+
+[安装依赖](https://www.npmjs.com/package/vite-plugin-mock)
+
+[安装遇到报错解决方案](https://blog.csdn.net/Yourlittlecutie/article/details/131824008)
+
+```text
+pnpm install mockjs vite-plugin-mock@2.9.6 -D
+```
